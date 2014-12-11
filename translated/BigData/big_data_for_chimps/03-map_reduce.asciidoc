@@ -1,10 +1,10 @@
 [[map_reduce]]
 == Map/Reduce
 
-.Chimpanzee and Elephant Save Christmas
+.黑猩猩 和 大象 拯救 圣诞节
 ******
 
-It was holiday time at the North Pole, and letters from little boys and little girls all over the world flooded in as they always do. But one year several years ago, the world had grown just a bit too much. The elves just could not keep up with the scale of requests -- Christmas was in danger! Luckily, their friends at the Elephant & Chimpanzee Corporation were available to help. Packing their typewriters and good winter coats, JT, Nanette and the crew headed to the Santaplex, the headquarters for toy manufacture at the North Pole. Here's what they found.
+It was holiday time at the North Pole, and letters from little boys and little girls all over the world flooded in as they always do. But one year several years ago, the world had grown just a bit too much. The elves just could not keep up with the scale of requests -- 圣诞节正处于危险之中! 幸运地是, their friends at the Elephant & Chimpanzee Corporation were available to help. Packing their typewriters and good winter coats, JT, Nanette and the crew headed to the Santaplex, the headquarters for toy manufacture at the North Pole. Here's what they found.
 
 [float]
 ==== Trouble in Toyland
@@ -90,7 +90,7 @@ image::images/chimps_and_elves/bchm_0205.png[Each toy at a unique station]
 ******
 // end of C&E save xmas
 
-=== Introduction
+=== 简介
 
 //
 // Make this less "in the previous chapter" and be "now we're learning (building on...)
@@ -123,7 +123,7 @@ Ms Claus, the CIO of Santa Corp, has heard about this new "map/reduce"
 
 
 
-=== Example: Reindeer Games
+=== 实例: Reindeer Games
 
 Santa Claus and his elves are busy year-round, but outside the holiday season Santa's flying reindeer do not have many responsibilities. As flying objects themselves, they spend a good part of their multi-month break pursuing their favorite hobby: UFOlogy (the study of Unidentified Flying Objects and the search for extraterrestrial civilization). So you can imagine how excited they were to learn about the data set of more than 60,000 documented UFO sightings we worked with in the first chapter.
 
@@ -156,9 +156,9 @@ The first request from the reindeer team is to organize the sightings into group
 
 ===== Mapper
 
-In the Chimpanzee & Elephant world, a chimp had the following role:
+在黑猩猩和大象的世界里, 一个黑猩猩扮演的角色有:
 
-1. read and understand each letter
+1. 阅读和理解每封信件
 2. create a new intermediate item having a label (the type of toy) and information about the toy (the work order)
 3. hand it to the elephant which delivers to that toy's workbench
 
@@ -388,7 +388,7 @@ Now that you've seen the partition, sort and secondary sort in action, it's time
 
 As we mentioned in the opening, the fundamental challenge of Big Data is how to put records into relevant context, even when it is distributed in a highly non-local fashion.  Traditional databases and high-performance computing approaches use a diverse set of methods and high-cost hardware to brute-force the problem but at some point, the joint laws of physics and economics win out.  Hadoop, instead, gives you exactly and _only one_ "locality" primitive -- only one way to express which records should be grouped in context -- namely, _partition-group-sort_ -'ing the records by their label.  The sidebar (REF) about the Hadoop contract describes the precise properties of this operation but here is a less formal explanation of its essential behavior.
 
-==== Partition
+==== Partition 分区
 
 The partition key portion of the label governs how records are assigned to Reducers; it is analogous to the tear-sheet that mapped which toy types went to which workbench.  Just as there was only one workbench for dolls and one workbench for ponies, each partition maps to _exactly one_ Reducer.  Since there are generally a small number of Reducers and an arbitrary number of partitions, each Reducer will typically see many partitions.
 
@@ -402,17 +402,17 @@ The naive `HashPartitioner` would not work for the elves, we assume -- you don't
 
 // (TODO: coal)
 
-==== Group
+==== Group 分组
 
 The group key governs, well, the actual groups your program sees.  All the records within a group arrive together -- once you see a record from one group, you will see all of them in a row and you will never again see a record from a preceding group.
 
-==== Secondary Sort
+==== Secondary Sort 二次排序
 
 Within the group, the records are sent in the order given by the sort key.  When you are using the Hadoop streaming interface (the basis for Wukong, MrJobs and the like), the only datatype is text, and so records are sorted lexicographically by their UTF-8 characters.  (TECHREVIEW: is it UTF-8 or binary strings?)
 
 This means that:
 
-// => [".hello.", "12345", "42", "Apple", "Internationalization", "Iñtërnâtiônàlizætiøn", "Zoo", "apple", "kosme", "~hello~", "κόσμε"]
+// => [".hello.", "12345", "42", "Apple", "Internationalization", "Iñtërnâtiônàlizætiøn", "Zoo", "apple", "kosme", "~hello~", "κόσμε"]
 
 * `Zoo` comes after `Apple`, because `A` comes before `Z`
 * `Zoo` comes _before_ `apple`, because upper-case characters precede lower-case characters
@@ -568,7 +568,7 @@ As your Reducers emit records, they are streamed directly to the job output, typ
 
 You may wish to send your job's output not to the HDFS or S3 but to a scalable database or other external data store.  (We'll show an example of this in the chapter on HBase (REF))  While your job is in development, though, it is typically best to write its output directly to the HDFS (perhaps at replication factor 1), then transfer it to the external target in a separate stage.  The HDFS is generally the most efficient output target and the least likely to struggle under load.  This checkpointing also encourages the best practice of sanity-checking your output and asking questions.
 
-==== A Quick Note on Storage (HDFS)
+==== A Quick Note on Storage (HDFS) 关于存储的简要说明
 
 If you're a Hadoop _administrator_ responsible for cluster setup and maintenance, you'll want to know a lot about Hadoop's underlying storage mechanism, called HDFS.  As an _analyst_ who writes jobs to run on a Hadoop cluster, though, you need to know just one key fact:
 
