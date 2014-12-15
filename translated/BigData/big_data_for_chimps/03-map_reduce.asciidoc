@@ -129,9 +129,9 @@ Santa Claus and his elves are busy year-round, but outside the holiday season Sa
 
 Sixty thousand sightings is much higher than a reindeer can count (only four hooves!), so JT and Nanette occasionally earn a little good favor from Santa Claus by helping the reindeer answer questions about the UFO data. We can do our part by helping our reindeer friends understand when, during the day, UFOs are most likely to be sighted.
 
-==== UFO Sighting Data Model
+==== UFO 目击 数据模型
 
-The data model for a UFO sighting has fields for: date of sighting and of report; human-entered location; duration; shape of craft; and eye-witness description.
+UFO目击数据模型有如下的属性: 观测时间和报告时间; 发生位置信息; 持续时间; 形状; 目击证人描述。
 
 ------
 class SimpleUfoSighting
